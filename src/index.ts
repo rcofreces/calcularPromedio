@@ -2,20 +2,28 @@ let dimensionCantidad: number = Number(
   prompt("Ingrese cuantos chicos hay en el equipo de fútbol")
 );
 let cantidadChicos: number[] = new Array(dimensionCantidad);
-let edadesChicos: number[] = new Array(dimensionCantidad);
-let promedio: number = 0;
+let min: number = 3;
+let max: number = 7;
 
-function aleatorio(menorValor: number, mayorValor: number): void {
-  let resultado: number = 0;
-  menorValor = 3;
-  mayorValor = 7;
-  for (let indice: number = 0; indice < cantidadChicos.length; indice++) {
-    resultado = Math.random() * (mayorValor - menorValor) + menorValor;
-    console.log(`Edad del alumno ${edadesChicos[indice] + 1} es ${resultado.toFixed()}`);
-  }
+function aleatorio(menorValor: number, mayorValor: number): number {
+  return Math.floor(Math.random() * (mayorValor + 1 - menorValor) + menorValor);
 }
 
-aleatorio(3, 7)
+function calcularPromedio(vector: number[]): number {
+  let resultado: number = 0;
+  let promedio: number = 0;
+  for (let i: number = 0; i < vector.length; i++) {
+    resultado += vector[i];
+  }
+  promedio = resultado / vector.length;
+  return promedio;
+}
 
-//promedio = aleatorio(3, 7) / 5;
-//console.log(`El promedio de edades de los chicos de fútbol es ${promedio}`);
+for (let i: number = 0; i < cantidadChicos.length; i++) {
+  cantidadChicos[i] = aleatorio(min, max);
+}
+
+console.log(`Las edades de los chicos son: ${cantidadChicos}`);
+console.log(
+  `El promedio de edad de los chicos es: ${calcularPromedio(cantidadChicos)}`
+);
